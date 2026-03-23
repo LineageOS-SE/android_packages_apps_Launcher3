@@ -65,10 +65,11 @@ data class FolderProfile(
             responsiveWorkspaceCellSpec: CalculatedCellSpec,
             responsiveFolderWidthSpec: CalculatedResponsiveSpec,
             iconSizeSteps: IconSizeSteps,
+            iconSizeScale: Float = 1.0f,
         ): FolderProfile {
             val folderLabelTextScale = res.getFloat(R.dimen.folder_label_text_scale)
             val minLabelTextSize: Int = pxFromSp(MIN_FOLDER_TEXT_SIZE_SP, metrics, scale)
-            var folderChildIconSizePx = responsiveWorkspaceCellSpec.iconSize
+            var folderChildIconSizePx = (responsiveWorkspaceCellSpec.iconSize * iconSizeScale).toInt()
             var folderChildTextSizePx = responsiveWorkspaceCellSpec.iconTextSize
             val folderCellWidthPx = responsiveFolderWidthSpec.cellSizePx
             // Reduce icon width if it's wider than the expected folder cell width
@@ -139,6 +140,7 @@ data class FolderProfile(
             cellSize: Point,
             res: Resources,
             iconSizeSteps: IconSizeSteps,
+            iconSizeScale: Float = 1.0f,
         ): FolderProfile {
             val minLabelTextSize: Int = pxFromSp(MIN_FOLDER_TEXT_SIZE_SP, metrics, scale)
             val folderLabelTextScale = res.getFloat(R.dimen.folder_label_text_scale)
@@ -181,7 +183,7 @@ data class FolderProfile(
 
             val invIconSizeDp = inv.iconSize[typeIndex]
             val invIconTextSizeDp = inv.iconTextSize[typeIndex]
-            var folderChildIconSizePx = max(1, pxFromDp(invIconSizeDp, metrics, scale))
+            var folderChildIconSizePx = (max(1, pxFromDp(invIconSizeDp, metrics, scale)) * iconSizeScale).toInt()
             var folderChildTextSizePx = pxFromSp(invIconTextSizeDp, metrics, scale)
             val folderLabelTextSizePx =
                 max(minLabelTextSize, (folderChildTextSizePx * folderLabelTextScale).toInt())
@@ -247,12 +249,13 @@ data class FolderProfile(
             inv: InvariantDeviceProfile,
             typeIndex: Int,
             res: Resources,
+            iconSizeScale: Float = 1.0f,
         ): FolderProfile {
             val folderLabelTextScale = res.getFloat(R.dimen.folder_label_text_scale)
             val minLabelTextSize: Int = pxFromSp(MIN_FOLDER_TEXT_SIZE_SP, metrics, scale)
             val invIconSizeDp = inv.iconSize[typeIndex]
             val invIconTextSizeDp = inv.iconTextSize[typeIndex]
-            val folderChildIconSizePx = max(1, pxFromDp(invIconSizeDp, metrics, scale))
+            val folderChildIconSizePx = (max(1, pxFromDp(invIconSizeDp, metrics, scale)) * iconSizeScale).toInt()
             val folderChildTextSizePx = pxFromSp(invIconTextSizeDp, metrics, scale)
             val textHeight: Int = calculateTextHeight(folderChildTextSizePx.toFloat())
             val cellPaddingX =
@@ -305,6 +308,7 @@ data class FolderProfile(
             responsiveFolderWidthSpec: CalculatedResponsiveSpec?,
             iconSizeSteps: IconSizeSteps,
             cellSize: Point,
+            iconSizeScale: Float = 1.0f,
         ): FolderProfile {
             return when {
                 (isResponsive &&
@@ -321,6 +325,7 @@ data class FolderProfile(
                         responsiveWorkspaceCellSpec,
                         responsiveFolderWidthSpec,
                         iconSizeSteps,
+                        iconSizeScale,
                     )
                 }
                 isScalable -> {
@@ -333,10 +338,11 @@ data class FolderProfile(
                         cellSize,
                         res,
                         iconSizeSteps,
+                        iconSizeScale,
                     )
                 }
                 else -> {
-                    createFolderProfileNonScalable(scale, metrics, inv, typeIndex, res)
+                    createFolderProfileNonScalable(scale, metrics, inv, typeIndex, res, iconSizeScale)
                 }
             }
         }

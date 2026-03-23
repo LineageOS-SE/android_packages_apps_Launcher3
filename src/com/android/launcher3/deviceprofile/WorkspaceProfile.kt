@@ -384,7 +384,7 @@ data class WorkspaceProfile(
 
             val iconDrawablePaddingOriginalPx = responsiveWorkspaceCellSpec.iconDrawablePadding
             var iconTextSizePx = responsiveWorkspaceCellSpec.iconTextSize
-            var iconSizePx = responsiveWorkspaceCellSpec.iconSize
+            var iconSizePx = (responsiveWorkspaceCellSpec.iconSize * inv.iconSizeScale).toInt()
             val cellWidthPx = responsiveWorkspaceWidthSpec.cellSizePx
             val cellHeightPx = responsiveWorkspaceHeightSpec.cellSizePx
             var maxIconTextLineCount = responsiveWorkspaceCellSpec.iconTextMaxLineCount

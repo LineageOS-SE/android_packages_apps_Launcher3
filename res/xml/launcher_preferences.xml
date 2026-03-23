@@ -106,6 +106,16 @@
         android:defaultValue="false"
         android:persistent="true" />
 
+    <androidx.preference.SeekBarPreference
+        android:key="pref_icon_size_scale"
+        android:title="@string/icon_size_title"
+        android:defaultValue="100"
+        android:max="120"
+        launcher:min="80"
+        launcher:showSeekBarValue="true"
+        launcher:updatesContinuously="true"
+        android:persistent="true" />
+
     <SwitchPreferenceCompat
         android:key="pref_desktop_show_labels"
         android:title="@string/desktop_show_labels"

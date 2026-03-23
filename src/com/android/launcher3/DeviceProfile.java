@@ -402,9 +402,9 @@ public class DeviceProfile {
         }
 
         if (mIsResponsiveGrid) {
-            updateHotseatSizes(mResponsiveWorkspaceCellSpec.getIconSize());
+            updateHotseatSizes((int) (mResponsiveWorkspaceCellSpec.getIconSize() * inv.iconSizeScale));
         } else {
-            updateHotseatSizes(pxFromDp(inv.iconSize[mTypeIndex], mMetrics));
+            updateHotseatSizes((int) (pxFromDp(inv.iconSize[mTypeIndex], mMetrics) * inv.iconSizeScale));
         }
 
         mBubbleBarSpaceThresholdPx =
@@ -503,7 +503,8 @@ public class DeviceProfile {
                 /*typeIndex*/ mTypeIndex,
                 /*metrics*/ mMetrics,
                 /*panelCount*/ getPanelCount(),
-                /*iconSizePx*/ max(1, pxFromDp(inv.iconSize[mTypeIndex], mMetrics)),
+                /*iconSizePx*/ (int) (max(1, pxFromDp(inv.iconSize[mTypeIndex], mMetrics))
+                        * inv.iconSizeScale),
                 /*insets*/ mInsets,
                 /*isFirstPass*/ true,
                 /*isSeascape*/ isSeascape(),
@@ -842,7 +843,8 @@ public class DeviceProfile {
                     mResponsiveAllAppsWidthSpec,
                     mResponsiveAllAppsHeightSpec,
                     mIconSizeSteps,
-                    isVerticalBarLayout()
+                    isVerticalBarLayout(),
+                    inv.iconSizeScale
             );
             updateAllAppsWithResponsiveMeasures();
         } else {
@@ -994,7 +996,8 @@ public class DeviceProfile {
                 mResponsiveWorkspaceCellSpec,
                 mResponsiveFolderWidthSpec,
                 mIconSizeSteps,
-                mWorkspaceProfile.getCellSize()
+                mWorkspaceProfile.getCellSize(),
+                inv.iconSizeScale
         );
     }
 

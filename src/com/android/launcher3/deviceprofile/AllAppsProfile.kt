@@ -163,8 +163,9 @@ data class AllAppsProfile(
             responsiveAllAppsHeightSpec: CalculatedResponsiveSpec,
             iconSizeSteps: IconSizeSteps,
             isVerticalBarLayout: Boolean,
+            iconSizeScale: Float = 1.0f,
         ): AllAppsProfile {
-            var allAppsIconSizePx = responsiveAllAppsCellSpec.iconSize
+            var allAppsIconSizePx = (responsiveAllAppsCellSpec.iconSize * iconSizeScale).toInt()
             var allAppsIconTextSizePx: Float = responsiveAllAppsCellSpec.iconTextSize.toFloat()
             var allAppsIconDrawablePaddingPx =
                 getNormalizedIconDrawablePadding(

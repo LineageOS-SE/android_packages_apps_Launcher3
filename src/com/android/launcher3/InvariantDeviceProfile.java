@@ -26,6 +26,7 @@ import static com.android.launcher3.LauncherPrefs.DRAWER_OPEN_KEYBOARD;
 import static com.android.launcher3.LauncherPrefs.ENABLE_TWOLINE_ALLAPPS_TOGGLE;
 import static com.android.launcher3.LauncherPrefs.FIXED_LANDSCAPE_MODE;
 import static com.android.launcher3.LauncherPrefs.GRID_NAME;
+import static com.android.launcher3.LauncherPrefs.ICON_SIZE_SCALE;
 import static com.android.launcher3.LauncherPrefs.NON_FIXED_LANDSCAPE_GRID_NAME;
 import static com.android.launcher3.LauncherPrefs.SHOW_DESKTOP_LABELS;
 import static com.android.launcher3.LauncherPrefs.SHOW_DRAWER_LABELS;
@@ -169,6 +170,7 @@ public class InvariantDeviceProfile {
     public float[] iconTextSize;
     public int iconBitmapSize;
     public int fillResIconDpi;
+    public float iconSizeScale;
     public @DeviceType int deviceType;
     public Info displayInfo;
 
@@ -296,6 +298,7 @@ public class InvariantDeviceProfile {
         mMainExecutor = mainExecutor;
 
         String gridName = prefs.get(GRID_NAME);
+        iconSizeScale = mPrefs.get(ICON_SIZE_SCALE) / 100f;
         initGrid(gridName);
         mThemeManager.generateIconShape(iconBitmapSize);
 
@@ -323,6 +326,9 @@ public class InvariantDeviceProfile {
             } else if (ENABLE_TWOLINE_ALLAPPS_TOGGLE.getSharedPrefKey().equals(key)
                     && enableTwoLinesInAllApps != prefs.get(ENABLE_TWOLINE_ALLAPPS_TOGGLE)) {
                 onConfigChanged();
+            } else if (ICON_SIZE_SCALE.getSharedPrefKey().equals(key)) {
+                iconSizeScale = prefs.get(ICON_SIZE_SCALE) / 100f;
+                onConfigChanged();
             } else if (ALLAPPS_THEMED_ICONS.getSharedPrefKey().equals(key) ||
                     DRAWER_OPEN_KEYBOARD.getSharedPrefKey().equals(key) ||
                     SHOW_DESKTOP_LABELS.getSharedPrefKey().equals(key) ||
@@ -330,9 +336,10 @@ public class InvariantDeviceProfile {
                 onConfigChanged();
             }
         };
-        prefs.addListener(prefListener, FIXED_LANDSCAPE_MODE, ENABLE_TWOLINE_ALLAPPS_TOGGLE);
+        prefs.addListener(prefListener, FIXED_LANDSCAPE_MODE, ENABLE_TWOLINE_ALLAPPS_TOGGLE,
+                ICON_SIZE_SCALE);
         lifeCycle.addCloseable(() -> prefs.removeListener(prefListener,
-                FIXED_LANDSCAPE_MODE, ENABLE_TWOLINE_ALLAPPS_TOGGLE));
+                FIXED_LANDSCAPE_MODE, ENABLE_TWOLINE_ALLAPPS_TOGGLE, ICON_SIZE_SCALE));
 
         SimpleBroadcastReceiver localeReceiver = new SimpleBroadcastReceiver(context,
                 mMainExecutor, i -> onConfigChanged());

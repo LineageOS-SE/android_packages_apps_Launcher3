@@ -253,6 +253,7 @@ constructor(@ApplicationContext private val encryptedContext: Context) {
         @JvmField val DRAWER_OPEN_KEYBOARD = backedUpItem("pref_drawer_open_keyboard", false)
         @JvmField val SHOW_DESKTOP_LABELS = backedUpItem("pref_desktop_show_labels", true)
         @JvmField val SHOW_DRAWER_LABELS = backedUpItem("pref_drawer_show_labels", true)
+        @JvmField val ICON_SIZE_SCALE = backedUpItem("pref_icon_size_scale", 100)
         @JvmField val SLEEP_GESTURE = backedUpItem("pref_sleep_gesture", false)
         @JvmField val SLEEP_GESTURE_HAPTIC = backedUpItem("pref_sleep_gesture_haptic", false)
         @JvmField
