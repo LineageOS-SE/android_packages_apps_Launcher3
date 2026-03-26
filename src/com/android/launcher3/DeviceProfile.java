@@ -368,7 +368,8 @@ public class DeviceProfile {
                 // TODO(431261051) HotseatProfile is calculated before the WorkspaceProfile hence
                 //  this variable needs to be manually set here. A better way to handle this is
                 //  necessary.
-                res.getDimensionPixelSize(R.dimen.workspace_page_indicator_height)
+                res.getDimensionPixelSize(R.dimen.workspace_page_indicator_height),
+                Utilities.showQSB(context)
         );
 
         // Whether QSB might be inline in appropriate orientation (e.g. landscape).
