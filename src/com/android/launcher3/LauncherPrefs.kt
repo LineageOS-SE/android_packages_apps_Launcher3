@@ -256,6 +256,11 @@ constructor(@ApplicationContext private val encryptedContext: Context) {
         @JvmField val ICON_SIZE_SCALE = backedUpItem("pref_icon_size_scale", 100)
         @JvmField val SLEEP_GESTURE = backedUpItem("pref_sleep_gesture", false)
         @JvmField val SLEEP_GESTURE_HAPTIC = backedUpItem("pref_sleep_gesture_haptic", false)
+
+        // Hotseat searchbar preferences
+        @JvmField val DOCK_SEARCH = backedUpItem("pref_dock_search", true)
+        @JvmField val DOCK_AI_MUSIC_SEARCH = backedUpItem("pref_dock_ai_music_search", false)
+        @JvmField val QSB_OUTER_OPACITY = backedUpItem("pref_qsb_outer_opacity", 70)
         @JvmField
         val PROMISE_ICON_IDS = nonRestorableItem(InstallSessionHelper.PROMISE_ICON_IDS, "")
         @JvmField val WORK_EDU_STEP = backedUpItem("showed_work_profile_edu", 0)

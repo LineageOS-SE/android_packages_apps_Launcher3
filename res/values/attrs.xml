@@ -61,6 +61,15 @@
     <attr name="focusOutlineColor" format="color" />
     <attr name="focusInnerOutlineColor" format="color" />
 
+    <!-- Hotseat QSB attributes -->
+    <attr name="qsbFillColor" format="color" />
+    <attr name="qsbFillColorThemed" format="color" />
+    <attr name="qsbOuterColor" format="color" />
+    <attr name="qsbIconTintPrimary" format="color" />
+    <attr name="qsbIconTintSecondary" format="color" />
+    <attr name="qsbIconTintTertiary" format="color" />
+    <attr name="qsbIconTintQuaternary" format="color" />
+
     <!-- Device search related attributes -->
     <attr name="focusHighlight" format="color" />
     <attr name="groupHighlight" format="color" />

@@ -1065,4 +1065,31 @@ public final class Utilities {
     public static boolean isWorkspaceEditAllowed(Context context) {
         return !LauncherPrefs.WORKSPACE_LOCK.get(context);
     }
+
+    // Hotseat QSB helpers
+
+    public static final String GSA_PACKAGE = "com.google.android.googlequicksearchbox";
+    public static final String LENS_ACTIVITY =
+            "com.google.android.apps.search.lens.LensExportedActivity";
+    public static final String LENS_URI = "google://lens";
+
+    public static boolean isGSAEnabled(Context context) {
+        try {
+            return context.getPackageManager().getApplicationInfo(GSA_PACKAGE, 0).enabled;
+        } catch (android.content.pm.PackageManager.NameNotFoundException e) {
+            return false;
+        }
+    }
+
+    public static boolean showQSB(Context context) {
+        return isGSAEnabled(context) && LauncherPrefs.DOCK_SEARCH.get(context);
+    }
+
+    public static boolean isAiMusicSearchEnabled(Context context) {
+        return LauncherPrefs.DOCK_AI_MUSIC_SEARCH.get(context);
+    }
+
+    public static int getQsbOuterOpacity(Context context) {
+        return LauncherPrefs.QSB_OUTER_OPACITY.get(context);
+    }
 }

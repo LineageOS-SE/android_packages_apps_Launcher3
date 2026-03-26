@@ -1,0 +1,42 @@
+/*
+ * SPDX-FileCopyrightText: The LineageOS Project
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+package com.android.launcher3.qsb;
+
+import android.content.Context;
+import android.content.Intent;
+import android.util.AttributeSet;
+import android.widget.ImageView;
+
+public class AssistantIconView extends ImageView {
+
+    public AssistantIconView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        setScaleType(ScaleType.CENTER);
+        setOnClickListener(view -> {
+            String searchPackage = QsbContainerView.getSearchWidgetPackageName(context);
+            if (searchPackage != null) {
+                Intent intent = new Intent(Intent.ACTION_VOICE_COMMAND)
+                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                        .setPackage(searchPackage);
+                context.startActivity(intent);
+            }
+        });
+    }
+
+    public AssistantIconView(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
+        setScaleType(ScaleType.CENTER);
+        setOnClickListener(view -> {
+            String searchPackage = QsbContainerView.getSearchWidgetPackageName(context);
+            if (searchPackage != null) {
+                Intent intent = new Intent(Intent.ACTION_VOICE_COMMAND)
+                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                        .setPackage(searchPackage);
+                context.startActivity(intent);
+            }
+        });
+    }
+}

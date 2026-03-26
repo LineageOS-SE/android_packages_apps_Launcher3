@@ -376,6 +376,12 @@ public class SettingsActivity extends FragmentActivity
                 case KEY_SUGGESTIONS:
                     return launcherApps != null &&
                             launcherApps.isPackageEnabled(SUGGESTIONS_PACKAGE, myUserHandle());
+                case "pref_dock_search":
+                    preference.setOnPreferenceChangeListener((pref, newValue) -> {
+                        tryRecreateActivity();
+                        return true;
+                    });
+                    return true;
             }
             return true;
         }
